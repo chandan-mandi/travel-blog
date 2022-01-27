@@ -8,7 +8,7 @@ const Navbar = () => {
     return (
         <div className="bg-blue-50">
             <nav className="flex justify-between items-center container mx-auto py-4 text-2xl font-bold px-2">
-                <Link className="flex items-center" to="/"><img className="h-10" src="https://cdn-icons.flaticon.com/png/512/4284/premium/4284034.png?token=exp=1643195139~hmac=72f544eefd1737b599e273936baab8f0" alt="banner" />Tours Story</Link>
+                <Link className="flex items-center" to="/"><img className="h-10" src="https://i.ibb.co/QCkxmkX/around.png" alt="banner" /><span className='capitalize font-semibold text-[#FFA902]'>Tours</span> Story</Link>
                 <div
                     className="lg:hidden block text-4xl"
                     onClick={() => {
