@@ -4,6 +4,7 @@ import TopBanner from '../../components/Home/Banner/TopBanner';
 import ChooseCategory from '../../components/Home/ChooseCategory/ChooseCategory';
 import FeatureExplore from '../../components/Home/FeatureExplore/FeatureExplore';
 import RecentBlogs from '../../components/Home/RecentBlogs/RecentBlogs';
+import Footer from '../Footer';
 import Navbar from '../Shared/Navbar/Navbar';
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
             {/* <ChooseCategory /> */}
             <FeatureExplore />
             <RecentBlogs />
+            <Footer />
         </div>
     );
 };

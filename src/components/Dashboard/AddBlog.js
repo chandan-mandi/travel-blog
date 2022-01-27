@@ -3,8 +3,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
+import useAuth from '../hooks/useAuth';
 
 const AddBlog = () => {
+    const { user } = useAuth();
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = async data => {
         console.log('img', data);
@@ -14,7 +16,7 @@ const AddBlog = () => {
         const loading = toast.loading('Uploading...Please wait!')
         let imageURL = "";
         console.log(data)
-        if(data.img[0]){
+        if (data.img[0]) {
             const imageData = new FormData();
             imageData.set('key', 'acb2d4c7a68ef1bf06d396d73adb600a')
             imageData.append('image', data.img[0]);
@@ -35,19 +37,20 @@ const AddBlog = () => {
             img: imageURL,
             author: data.author,
             publishDate: new Date().toLocaleDateString(),
-            status: "Pending"
+            status: "Pending",
+            authorEmail: user.email
         }
         console.log("Blogdata", blogInfo)
         // dispatch(addNewRide(serviceInfo))
-        await axios.post("http://localhost:5000/blogs", blogInfo)
-        .then(res => {
-            if (res.data.insertedId) {
-                toast.success('Successfully Added', {
-                    id: loading,
-                });
-                return swal("Successfully Added!", "Your Blog has been successfully added.", "success");
-            }
-        })
+        await axios.post("https://tours-story-server.herokuapp.com/blogs", blogInfo)
+            .then(res => {
+                if (res.data.insertedId) {
+                    toast.success('Successfully Added', {
+                        id: loading,
+                    });
+                    return swal("Successfully Added!", "Your Blog has been successfully added.", "success");
+                }
+            })
         reset();
     }
     return (
@@ -67,7 +70,7 @@ const AddBlog = () => {
                                             <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                                                 Title:
                                             </span>
-                                            <input type="text" name="company_website" id="company_website" class="py-2 pl-4 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md md:text-base sm:text-sm border-gray-300" placeholder="Type your Blog heading" {...register("title")}/>
+                                            <input type="text" name="company_website" id="company_website" class="py-2 pl-4 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md md:text-base sm:text-sm border-gray-300" placeholder="Type your Blog heading" {...register("title")} />
                                         </div>
                                     </div>
                                 </div>
@@ -93,9 +96,9 @@ const AddBlog = () => {
                                     </div>
                                     <div class="mt-1 flex rounded-md shadow-sm">
                                         <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                                            Author: 
+                                            Author:
                                         </span>
-                                        <input type="text" name="company_website" id="company_website" class="py-2 pl-4 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md md:text-base sm:text-sm border-gray-300" placeholder="Type Author name" {...register("author")}/>
+                                        <input type="text" name="company_website" id="company_website" class="py-2 pl-4 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md md:text-base sm:text-sm border-gray-300" placeholder="Type Author name" {...register("author")} />
                                     </div>
                                 </div>
 

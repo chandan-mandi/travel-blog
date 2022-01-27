@@ -21,7 +21,7 @@ const TopBanner = () => {
         }
     ]
     useEffect(() =>  {
-        axios.get("http://localhost:5000/slideses")
+        axios.get("https://tours-story-server.herokuapp.com/slideses")
         .then((res) => {
             setSlides(res.data)
         })

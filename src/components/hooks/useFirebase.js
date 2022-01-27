@@ -1,6 +1,7 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, updateProfile, getIdToken } from "firebase/auth";
+import axios from "axios";
+import { createUserWithEmailAndPassword, getAuth, getIdToken, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
-import initializeAuthentication from "../LoginManager/Firebase/firebase.init"
+import initializeAuthentication from "../LoginManager/Firebase/firebase.init";
 
 initializeAuthentication();
 const useFirebase = () => {
@@ -95,13 +96,13 @@ const useFirebase = () => {
 
     // admin checking
     useEffect(() => {
-        fetch(`http://localhost:5000/users/${user.email}`, {
+        axios.get(`https://tours-story-server.herokuapp.com/users/${user.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('idToken')}`
             }
         })
-            .then(res => res.json())
-            .then(data => setAdmin(data.admin))
+            // .then(res => res.json())
+            .then(data => setAdmin(data.data.admin))
     }, [user.email])
 
     const logOut = () => {
@@ -116,7 +117,7 @@ const useFirebase = () => {
 
     const saveUser = (email, displayName, photoURL, method) => {
         const user = { email, displayName, photoURL };
-        fetch('http://localhost:5000/users', {
+        fetch('https://tours-story-server.herokuapp.com/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'

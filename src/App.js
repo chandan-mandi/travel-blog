@@ -10,6 +10,10 @@ import SignUp from './components/LoginManager/SignUp/SignUp';
 import Dashboard from './pages/Dashboard';
 import AddBlog from './components/Dashboard/AddBlog';
 import { Toaster } from 'react-hot-toast';
+import MyBlogs from './components/Dashboard/MyBlogs';
+import AllBlogs from './components/Dashboard/AllBlogs';
+import MakeAdmin from './components/Dashboard/MakeAdmin';
+import BlogDetails from './pages/BlogDetails';
 
 function App() {
   return (
@@ -20,8 +24,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/blogs/:id" element={<BlogDetails />} />
             <Route path={`/dashboard`} element={<Dashboard />} >
               <Route path={`/dashboard/addBlog`} element={<AddBlog />}> </Route>
+              <Route path={`/dashboard/myBlogs`} element={<MyBlogs />}> </Route>
+              <Route path={`/dashboard/allBlogs`} element={<AllBlogs />}> </Route>
+              <Route path={`/dashboard/makeAdmin`} element={<MakeAdmin />}> </Route>
             </Route>
           </Routes>
           <Toaster />

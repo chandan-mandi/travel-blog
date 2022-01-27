@@ -6,7 +6,7 @@ const Dashboard = () => {
     return (
         <div>
             <Sidebar />
-            <div className="relative md:ml-64 bg-blueGray-500">
+            <div className="relative md:ml-64 bg-blueGray-500 p-8">
                 <Outlet />
             </div>
         </div>

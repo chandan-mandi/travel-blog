@@ -5,26 +5,36 @@ import Fade from 'react-reveal/Fade';
 const MainBanner = () => {
     return (
         <div className='banner-main text-white'>
-            <div className="banner-overlay">
-                <div className="container">
-                    <div className="flex justify-center">
-                        <Fade left>
-                            <div className="col-lg-6">
-                                <div className="banner-content text-center text-md-start">
-                                    <h1>HEARD OF TH SPYERLIN A WORK TOP IN THINGS OT SEE IN AND DO <span>IN NORTHERN GO TO CALIFORNIA HILL.</span></h1>
-                                    <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed et donec purus viverra. Sit justo velit, eu sed sollicitudin tempus, risus. Sed sit elit mauris adipiscing. Lobortis pellentesque nulla accumsan id urna, ullamcorper gravida varius. Massa mauris, cursus orci magna non enim fames et sed. </h6>
-                                    
-                                    <button variant="info" className='rounded-pill mt-2' >
-                                        <h5 className='mb-0 px-3 py-2'><i className="far fa-play-circle text-danger"></i> Let's Go</h5>
-                                    </button>
-                                </div>
+            <div className="relative pt-16 pb-32 flex content-center items-center justify-center"
+                style={{
+                    minHeight: "75vh"
+                }}>
+                <div className="absolute top-0 w-full h-full bg-center bg-cover"
+                    style={{
+                        backgroundImage: "url('https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg')"
+                    }}>
+                    <span id="blackOverlay" className="w-full h-full absolute opacity-75 bg-black"></span>
+                </div>
+                <div className="container relative mx-auto">
+                    <div className="items-center flex flex-wrap">
+                        <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
+                            <div className="pr-12">
+                                <h1 className="text-white font-semibold text-5xl">
+                                    Your story starts with us.
+                                </h1>
+                                <p className="mt-4 text-lg text-gray-300">
+                                    This is a simple example of a Landing Page you can build
+                                    using Tailwind Starter Kit. It features multiple CSS
+                                    components based on the Tailwindcss design system.
+                                </p>
                             </div>
-                        </Fade>
+                        </div>
+
                     </div>
                 </div>
+                </div>
             </div>
-        </div>
-    );
+            );
 };
 
-export default MainBanner;
+            export default MainBanner;
