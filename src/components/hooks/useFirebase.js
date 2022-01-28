@@ -7,7 +7,6 @@ import initializeAuthentication from "../LoginManager/Firebase/firebase.init";
 initializeAuthentication();
 const useFirebase = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [sendVerificationEmail, setSendVerificationEmail] = useState(false);
     const [user, setUser] = useState({});
     const [userDetail, setUserDetail] = useState({});
     const [createdAc, setCreateAccount] = useState({});
@@ -88,7 +87,7 @@ const useFirebase = () => {
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, (user) => {
             console.log("auth",auth);
-            if (user.emailVerified) {
+            if (user) {
                 getIdToken(user)
                     .then(idToken => localStorage.setItem('idToken', idToken))
                 setUser(user);
@@ -119,6 +118,7 @@ const useFirebase = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
             setUser({})
+            setIsLoading(false)
         }).catch((error) => {
             // An error happened.
             console.log(error);
@@ -147,7 +147,6 @@ const useFirebase = () => {
         authError,
         signInWithGoogle,
         admin,
-        sendVerificationEmail,
         createdAc
     }
 }

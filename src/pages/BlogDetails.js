@@ -112,7 +112,7 @@ const BlogDetails = () => {
                             <div className="user-comments mt-8">
                                 <h1 className=''>Reviews: </h1>
                                 {
-                                    specificDetail.comments.length < 0 &&
+                                    specificDetail.comments?.length < 0 &&
                                         <div className="text-base font-semibold capitalize w-full my-2 py-1 px-2 rounded text-teal-600 bg-teal-200 last:mr-0 mr-1">
                                             No Reviews
                                         </div>

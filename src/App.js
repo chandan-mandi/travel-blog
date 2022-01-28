@@ -15,6 +15,8 @@ import AllBlogs from './components/Dashboard/AllBlogs';
 import MakeAdmin from './components/Dashboard/MakeAdmin';
 import BlogDetails from './pages/BlogDetails';
 import UpdateBlog from './components/Dashboard/UpdateBlog';
+import PrivateRoute from './components/LoginManager/PrivateRoute';
+import AdminRoute from './components/LoginManager/AdminRoute';
 
 function App() {
   return (
@@ -25,13 +27,13 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/blogs/:id" element={<BlogDetails />} />
-            <Route path={`/dashboard`} element={<Dashboard />} >
-              <Route path={`/dashboard/addBlog`} element={<AddBlog />}> </Route>
-              <Route path={`/dashboard/myBlogs`} element={<MyBlogs />}> </Route>
-              <Route path={`/dashboard/allBlogs`} element={<AllBlogs />}> </Route>
-              <Route path={`/dashboard/updateBlog/:id`} element={<UpdateBlog />}> </Route>
-              <Route path={`/dashboard/makeAdmin`} element={<MakeAdmin />}> </Route>
+            <Route path="/blogs/:id" element={<PrivateRoute> <BlogDetails /> </PrivateRoute>} />
+            <Route path={`/dashboard`} element={<PrivateRoute> <Dashboard /> </PrivateRoute>} >
+              <Route path={`/dashboard/addBlog`} element={<PrivateRoute> <AddBlog /> </PrivateRoute>}> </Route>
+              <Route path={`/dashboard/myBlogs`} element={<PrivateRoute> <MyBlogs /> </PrivateRoute>}> </Route>
+              <Route path={`/dashboard/allBlogs`} element={<AdminRoute> <AllBlogs /> </AdminRoute>}> </Route>
+              <Route path={`/dashboard/updateBlog/:id`} element={<AdminRoute><UpdateBlog /> </AdminRoute>}> </Route>
+              <Route path={`/dashboard/makeAdmin`} element={<AdminRoute> <MakeAdmin /> </AdminRoute>}> </Route>
             </Route>
           </Routes>
           <Toaster />

@@ -3,7 +3,7 @@ import React from 'react';
 const PopularPost = () => {
     return (
         <div class=" flex flex-col bg-white shadow-lg rounded-lg overflow-hidden">
-            <div class="bg-gray-200 text-gray-700 text-lg px-6 py-4">Popular Posts</div>
+            <div class="bg-gray-200 text-gray-700 text-lg px-6 py-4">Top Rated Spot</div>
 
             <div class="flex justify-between items-center px-6 py-4">
                 <div class="bg-orange-600 text-xs uppercase px-2 py-1 rounded-full border border-gray-200 text-gray-200 font-bold">Under Review</div>

@@ -3,29 +3,6 @@ import React, { useEffect, useState } from 'react';
 import FeatureCard from './FeatureCard';
 
 const FeatureExplore = () => {
-    const blogss = [
-        {
-            "title": "The Golden Sands of Florida and clifornia",
-            "about": "Lorem ipsum dolor sit amet, con turad iscingelit. In sed et donec purus viverra. Sit  justo velit, eu sed",
-            "category": "solo",
-            "img": "https://images.pexels.com/photos/667236/pexels-photo-667236.jpeg",
-            "author": "chandan"
-        },
-        {
-            "title": "Chandan The Golden Sands of Florida and clifornia",
-            "about": "Lorem ipsum dolor sit amet, con turad iscingelit. In sed et donec purus viverra. Sit  justo velit, eu sed",
-            "category": "solo",
-            "img": "https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg",
-            "author": "chandan"
-        },
-        {
-            "title": "The Golden Sands of Florida and clifornia",
-            "about": "Lorem ipsum dolor sit amet, con turad iscingelit. In sed et donec purus viverra. Sit  justo velit, eu sed",
-            "category": "solo",
-            "img": "https://images.pexels.com/photos/667236/pexels-photo-667236.jpeg",
-            "author": "chandan"
-        }
-    ]
     const [blogs, setBlogs] = useState([])
     const [page, setPage] = useState(0)
     const [pageCount, setPageCount] = useState(0)
@@ -59,14 +36,14 @@ const FeatureExplore = () => {
                         ></FeatureCard>
                     )
                 }
-                <div className="pagination m-8">
+            </div>
+                <div className="pagination md:container md:mx-auto py-8 flex justify-center items-center justify-items-center">
                     {[...Array(pageCount).keys()]
                         .map(number => <button
                             key={number}
                             onClick={() => setPage(number)}
                             className={number === page ? "mr-4 bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded" : 'mr-4 bg-white hover:bg-gray-200 text-black text-center py-2 px-4 rounded'}>{number + 1}</button>)}
                 </div>
-            </div>
         </div>
     );
 };
