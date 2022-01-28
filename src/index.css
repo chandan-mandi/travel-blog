@@ -15,7 +15,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+.icon-color {
+  color: yellow;
+}
 
 @layer components {
 /* group utilities */
@@ -35,6 +37,6 @@ code {
 }
 @layer utilities {
   .text-base {
-    
+
   }
 }

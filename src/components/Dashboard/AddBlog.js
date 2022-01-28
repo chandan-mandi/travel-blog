@@ -42,7 +42,7 @@ const AddBlog = () => {
         }
         console.log("Blogdata", blogInfo)
         // dispatch(addNewRide(serviceInfo))
-        await axios.post("https://tours-story-server.herokuapp.com/blogs", blogInfo)
+        await axios.post("http://localhost:5000/blogs", blogInfo)
             .then(res => {
                 if (res.data.insertedId) {
                     toast.success('Successfully Added', {

@@ -11,7 +11,7 @@ const MainBanner = () => {
                 }}>
                 <div className="absolute top-0 w-full h-full bg-center bg-cover"
                     style={{
-                        backgroundImage: "url('https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg')"
+                        backgroundImage: "url('https://i.ibb.co/Y8Hz31V/travel-banner.jpg')"
                     }}>
                     <span id="blackOverlay" className="w-full h-full absolute opacity-75 bg-black"></span>
                 </div>

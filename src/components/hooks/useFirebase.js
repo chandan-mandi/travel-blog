@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createUserWithEmailAndPassword, getAuth, getIdToken, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import initializeAuthentication from "../LoginManager/Firebase/firebase.init";
 
 initializeAuthentication();
@@ -8,6 +9,8 @@ const useFirebase = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [sendVerificationEmail, setSendVerificationEmail] = useState(false);
     const [user, setUser] = useState({});
+    const [userDetail, setUserDetail] = useState({});
+    const [createdAc, setCreateAccount] = useState({});
     const [authError, setAuthError] = useState('');
     const [admin, setAdmin] = useState(false)
 
@@ -21,18 +24,18 @@ const useFirebase = () => {
                 setAuthError('');
                 const newUser = { email, displayName: name };
                 console.log(userCredential);
-                setUser(userCredential.user);
-
-                setSendVerificationEmail(true)
+                setCreateAccount(userCredential.user);
+                toast.success("Please Check Your Email")
                 const photoURL = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
                 saveUser(email, name, photoURL, 'POST');
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
                     verifyEmail();
+                    navigate('/');
                 }).catch((error) => {
                 });
-                navigate('/');
+                
             })
             .catch((error) => {
                 setAuthError(error.message);
@@ -58,6 +61,7 @@ const useFirebase = () => {
                 const destination = location?.state?.from || '/';
                 navigate(destination);
                 setAuthError('');
+                setUserDetail(userCredential.user)
             })
             .catch((error) => {
                 setAuthError(error.message);
@@ -74,6 +78,7 @@ const useFirebase = () => {
                 setAuthError('');
                 const destination = location?.state?.from || '/';
                 navigate(destination);
+                setUserDetail(user)
             }).catch((error) => {
                 setAuthError(error.message);
             }).finally(() => setIsLoading(false));
@@ -82,11 +87,15 @@ const useFirebase = () => {
     //Observe user state
     useEffect(() => {
         const unsubscribed = onAuthStateChanged(auth, (user) => {
+            console.log("auth",auth);
             if (user.emailVerified) {
                 getIdToken(user)
                     .then(idToken => localStorage.setItem('idToken', idToken))
                 setUser(user);
-            } else {
+            } else if(user.emailVerified === false) {
+                toast.error("Please Verify your email")
+            }
+            else {
                 setUser({})
             }
             setIsLoading(false);
@@ -96,7 +105,7 @@ const useFirebase = () => {
 
     // admin checking
     useEffect(() => {
-        axios.get(`https://tours-story-server.herokuapp.com/users/${user.email}`, {
+        axios.get(`http://localhost:5000/users/${user.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('idToken')}`
             }
@@ -109,15 +118,17 @@ const useFirebase = () => {
         setIsLoading(true);
         signOut(auth).then(() => {
             // Sign-out successful.
+            setUser({})
         }).catch((error) => {
             // An error happened.
+            console.log(error);
         })
             .finally(() => setIsLoading(false));
     }
 
     const saveUser = (email, displayName, photoURL, method) => {
         const user = { email, displayName, photoURL };
-        fetch('https://tours-story-server.herokuapp.com/users', {
+        fetch('http://localhost:5000/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'
@@ -136,7 +147,8 @@ const useFirebase = () => {
         authError,
         signInWithGoogle,
         admin,
-        sendVerificationEmail
+        sendVerificationEmail,
+        createdAc
     }
 }
 

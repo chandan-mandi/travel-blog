@@ -2,12 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const AllBlogs = () => {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        axios.get("https://tours-story-server.herokuapp.com/blogs")
+        axios.get("http://localhost:5000/blogs")
             .then(({ data }) => {
                 setBlogs(data.blogs)
                 setLoading(false)
@@ -18,9 +19,43 @@ const AllBlogs = () => {
     const handleStatusChange = (id, status) => {
         const modifiedStatus = { id, status }
 
-        axios.patch(`https://tours-story-server.herokuapp.com/blogs/${id}`, modifiedStatus)
+        axios.patch(`http://localhost:5000/blogs/${id}`, modifiedStatus)
             .then(res => res.data && toast.success(`Set to ${status}`))
             .catch(error => alert(error.message))
+    }
+
+    const handleDelete = (id) => {
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure you want to delete!",
+            icon: "warning",
+            buttons: [true, "Yes"],
+            dangerMode: true,
+        }).then(wantDelete => {
+            if (wantDelete) {
+                const loadingId = toast.loading("Deleting...");
+                const url = `http://localhost:5000/blog/${id}`
+                fetch(url, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        toast.success('Deleted', {
+                            id: loadingId,
+                        });
+                        if (data.deletedCount > 0) {
+                            const remaining = blogs.filter(blog => blog?._id !== id)
+                            setBlogs(remaining);
+                            return swal("Successfully Delete!", "Your blog has been successfully deleted.", "success");
+                        }
+                    })
+                    .catch(err => {
+                        toast.dismiss(loading);
+                        swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true })
+                    })
+            }
+        })
     }
     return (
         <div className="container flex justify-center mx-auto">
@@ -73,7 +108,7 @@ const AllBlogs = () => {
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     <div className="text-sm text-gray-500">
-                                                        {blog.about.slice(0, 20)}
+                                                        {blog?.about?.slice(0, 20)}
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
@@ -93,7 +128,7 @@ const AllBlogs = () => {
                                                     {blog.publishDate}
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <Link to="/">
+                                                    <Link to={`/dashboard/updateBlog/${blog._id}`}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-blue-400" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
@@ -102,13 +137,13 @@ const AllBlogs = () => {
                                                     </Link>
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <Link to="/">
+                                                <div onClick={() => handleDelete(blog._id)} className='hover:cursor-pointer'>
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-red-400" fill="none"
                                                             viewBox="0 0 24 24" stroke="currentColor">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                         </svg>
-                                                    </Link>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>

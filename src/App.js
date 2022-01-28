@@ -14,6 +14,7 @@ import MyBlogs from './components/Dashboard/MyBlogs';
 import AllBlogs from './components/Dashboard/AllBlogs';
 import MakeAdmin from './components/Dashboard/MakeAdmin';
 import BlogDetails from './pages/BlogDetails';
+import UpdateBlog from './components/Dashboard/UpdateBlog';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path={`/dashboard/addBlog`} element={<AddBlog />}> </Route>
               <Route path={`/dashboard/myBlogs`} element={<MyBlogs />}> </Route>
               <Route path={`/dashboard/allBlogs`} element={<AllBlogs />}> </Route>
+              <Route path={`/dashboard/updateBlog/:id`} element={<UpdateBlog />}> </Route>
               <Route path={`/dashboard/makeAdmin`} element={<MakeAdmin />}> </Route>
             </Route>
           </Routes>
