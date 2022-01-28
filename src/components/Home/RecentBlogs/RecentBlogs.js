@@ -26,7 +26,7 @@ const RecentBlogs = () => {
         <div class="pt-6 pb-12 bg-gray-300">
             <div id="card" class="">
                 <h2 class="text-center font-serif  uppercase text-4xl xl:text-5xl">Recent Articles</h2>
-                <div class="md:container md:mx-auto py-8 grid grid-cols-3 gap-4">
+                <div class="md:container md:mx-auto py-8 md:grid md:grid-cols-3 gap-4">
                     {/* <!-- container for all cards --> */}
                     <div class="container w-100 mx-auto flex flex-col col-span-2">
                         {

@@ -15,7 +15,7 @@ const NavItems = () => {
             </Link>
             <Link
                 className="p-4 active:border-b-4 border-purple-600 text-xl hover:text-purple-800 m-2"
-                to="/features"
+                to="/blogs"
             >
                 Blog
             </Link>

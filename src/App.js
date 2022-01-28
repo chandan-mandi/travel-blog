@@ -17,6 +17,9 @@ import BlogDetails from './pages/BlogDetails';
 import UpdateBlog from './components/Dashboard/UpdateBlog';
 import PrivateRoute from './components/LoginManager/PrivateRoute';
 import AdminRoute from './components/LoginManager/AdminRoute';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Blogs from './pages/Blogs';
 
 function App() {
   return (
@@ -25,6 +28,10 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/blogs" element={<Blogs />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/blogs/:id" element={<PrivateRoute> <BlogDetails /> </PrivateRoute>} />
