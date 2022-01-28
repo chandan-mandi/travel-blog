@@ -10,7 +10,7 @@ const FeatureCard = ({blog}) => {
         <div onClick={() => handleBlogDetails(blog._id)} class="rounded overflow-hidden shadow-lg hover:cursor-pointer">
             <img class="w-full" src={blog.img} alt="Mountain" />
             <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2">{blog.title}</div>
+                <div class="font-bold text-xl mb-2">{blog.title?.slice(0,60)}</div>
                 <p class="text-gray-700 text-base">
                     {blog.about?.slice(0,120)}...
                 </p>
