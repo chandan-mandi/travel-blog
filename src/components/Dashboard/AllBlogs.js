@@ -8,7 +8,7 @@ const AllBlogs = () => {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        axios.get("http://localhost:5000/blogs")
+        axios.get("https://tours-story-server.herokuapp.com/blogs")
             .then(({ data }) => {
                 setBlogs(data.blogs)
                 setLoading(false)
@@ -19,7 +19,7 @@ const AllBlogs = () => {
     const handleStatusChange = (id, status) => {
         const modifiedStatus = { id, status }
 
-        axios.patch(`http://localhost:5000/blogs/${id}`, modifiedStatus)
+        axios.patch(`https://tours-story-server.herokuapp.com/blogs/${id}`, modifiedStatus)
             .then(res => res.data && toast.success(`Set to ${status}`))
             .catch(error => alert(error.message))
     }
@@ -34,7 +34,7 @@ const AllBlogs = () => {
         }).then(wantDelete => {
             if (wantDelete) {
                 const loadingId = toast.loading("Deleting...");
-                const url = `http://localhost:5000/blog/${id}`
+                const url = `https://tours-story-server.herokuapp.com/blog/${id}`
                 fetch(url, {
                     method: 'DELETE'
                 })
@@ -103,7 +103,7 @@ const AllBlogs = () => {
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     <div className="text-sm text-gray-900">
-                                                        {blog.title}
+                                                        {blog.title?.slice(0, 20)}
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-4">

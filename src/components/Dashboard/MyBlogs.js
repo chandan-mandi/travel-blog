@@ -10,7 +10,7 @@ const MyBlogs = () => {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        axios.get(`http://localhost:5000/blogs/${user.email}`, {
+        axios.get(`https://tours-story-server.herokuapp.com/blogs/${user.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('idToken')}`
             }
@@ -31,7 +31,7 @@ const MyBlogs = () => {
         }).then(wantDelete => {
             if (wantDelete) {
                 const loadingId = toast.loading("Deleting...");
-                const url = `http://localhost:5000/blog/${id}`
+                const url = `https://tours-story-server.herokuapp.com/blog/${id}`
                 fetch(url, {
                     method: 'DELETE'
                 })

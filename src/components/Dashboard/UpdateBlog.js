@@ -13,7 +13,7 @@ const UpdateBlog = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/blog/${id}`)
+        axios.get(`https://tours-story-server.herokuapp.com/blog/${id}`)
             .then((data) => {
                 setSpecificDetail(data.data)
                 setLoading(false)
@@ -47,7 +47,7 @@ const UpdateBlog = () => {
         }
         console.log("Blogdata", blogInfo)
         // dispatch(addNewRide(serviceInfo))
-        await axios.put(`http://localhost:5000/blog/${id}`, blogInfo)
+        await axios.put(`https://tours-story-server.herokuapp.com/blog/${id}`, blogInfo)
             .then(res => {
                 console.log(res);
                 toast.dismiss(loading);

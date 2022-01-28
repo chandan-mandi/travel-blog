@@ -8,7 +8,7 @@ const FeatureExplore = () => {
     const [pageCount, setPageCount] = useState(0)
     const size = 10;
     useEffect(() => {
-        axios.get(`http://localhost:5000/approveBlog?page=${page}&&size=${size}`)
+        axios.get(`https://tours-story-server.herokuapp.com/approveBlog?page=${page}&&size=${size}`)
             .then((res) => {
                 setBlogs(res.data.blogs)
                 const count = res.data.pageCount;

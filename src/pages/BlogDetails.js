@@ -18,7 +18,7 @@ const BlogDetails = () => {
     const [average, setAverage] = useState(0)
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/blog/${id}`)
+        axios.get(`https://tours-story-server.herokuapp.com/blog/${id}`)
             .then((data) => {
                 setSpecificDetail(data.data)
                 setLoading(false)
@@ -50,7 +50,7 @@ const BlogDetails = () => {
             rating: rate,
             product_id: id,
         }
-        await axios.put(`http://localhost:5000/addBlogComment/${id}`, newComment)
+        await axios.put(`https://tours-story-server.herokuapp.com/addBlogComment/${id}`, newComment)
             .then(res => {
                 console.log(res);
                 if (res.data.modifiedCount === 1) {

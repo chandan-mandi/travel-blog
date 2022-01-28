@@ -104,7 +104,7 @@ const useFirebase = () => {
 
     // admin checking
     useEffect(() => {
-        axios.get(`http://localhost:5000/users/${user.email}`, {
+        axios.get(`https://tours-story-server.herokuapp.com/users/${user.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('idToken')}`
             }
@@ -128,7 +128,7 @@ const useFirebase = () => {
 
     const saveUser = (email, displayName, photoURL, method) => {
         const user = { email, displayName, photoURL };
-        fetch('http://localhost:5000/users', {
+        fetch('https://tours-story-server.herokuapp.com/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'

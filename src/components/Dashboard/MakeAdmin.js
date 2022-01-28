@@ -12,7 +12,7 @@ const MakeAdmin = () => {
     const onSubmit = data => {
         console.log(data);
         const loading = toast.loading('Adding...Please wait!');
-        axios.put('http://localhost:5000/addAdmin', data, {
+        axios.put('https://tours-story-server.herokuapp.com/addAdmin', data, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('idToken')}`
             },

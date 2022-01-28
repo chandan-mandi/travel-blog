@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import PopularPostCard from './PopularPostCard';
-import RecentBlogCard from './RecentBlogCard';
 
 const PopularPost = () => {
     const [blogs, setBlogs] = useState([])
@@ -9,7 +8,7 @@ const PopularPost = () => {
     const [pageCount, setPageCount] = useState(0)
     const size = 3;
     useEffect(() => {
-        axios.get(`http://localhost:5000/approveBlog?page=${page}&&size=${size}`)
+        axios.get(`https://tours-story-server.herokuapp.com/approveBlog?page=${page}&&size=${size}`)
             .then((res) => {
                 setBlogs(res.data.blogs)
                 const count = res.data.pageCount;
